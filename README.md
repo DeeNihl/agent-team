@@ -71,10 +71,34 @@ agent-team/
 │   ├── tools/         # Agent tools
 │   └── main.py        # Main entry point
 ├── logs/              # Global logs directory
+├── tests/             # Unit tests
 ├── requirements.txt   # Project dependencies
 ├── setup.py           # Package setup
 └── README.md          # Project documentation
 ```
+
+## Testing
+
+The project uses pytest for testing. To run the tests:
+
+```bash
+# Install development dependencies
+pip install -e ".[dev]"
+
+# Run all tests
+pytest
+
+# Run tests with coverage report
+pytest --cov=agent_team
+
+# Skip tests that require actual model communication
+pytest -m "not optional"
+```
+
+The tests include:
+- Unit tests for each agent role (PLANNER, MANAGER, ACTOR, EVALUATOR)
+- Tests that verify model communication works correctly
+- Tests that validate configuration file parsing
 
 ## License
 
