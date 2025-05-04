@@ -9,6 +9,13 @@ setup(
         "requests>=2.25.1",
         "python-dotenv>=0.19.0",
     ],
+    extras_require={
+        "dev": [
+            "pytest>=7.0.0",
+            "pytest-mock>=3.10.0",
+            "pytest-cov>=4.0.0",
+        ]
+    },
     author="DeeNihl",
     author_email="deenihl@github.com",
     description="A bare bones Python autonomous agent project",
