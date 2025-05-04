@@ -584,28 +584,37 @@ class AgentTeam:
                 
         else:
             # Default to ollama
-            url = "http://localhost:11434/api/generate"
+            # Use api_url from parameters if provided, otherwise use default
+            url = model_params.get('api_url', "http://localhost:11434/api/generate")
             
+            # Make sure url has the full API path
+            if not url.endswith('/api/generate'):
+                url = f"{url}/api/generate"
+                
+            # Format the data according to Ollama API requirements
             data = {
                 "model": model_name,
-                "prompt": prompt
+                "prompt": prompt,
+                "options": {}
             }
             
-            # Add other parameters
+            # Add other parameters to the options object, excluding api_url and api_key
             for k, v in model_params.items():
-                try:
-                    # Convert to appropriate types
-                    if v.isdigit():
-                        data[k] = int(v)
-                    elif v.replace('.', '', 1).isdigit():
-                        data[k] = float(v)
-                    else:
-                        data[k] = v
-                except (ValueError, AttributeError):
-                    data[k] = v
+                if k not in ['api_url', 'api_key', 'model']:
+                    try:
+                        # Convert to appropriate types
+                        if v.isdigit():
+                            data["options"][k] = int(v)
+                        elif v.replace('.', '', 1).isdigit():
+                            data["options"][k] = float(v)
+                        else:
+                            data["options"][k] = v
+                    except (ValueError, AttributeError):
+                        data["options"][k] = v
             
             # Make ollama API request
             try:
+                logger.info(f"Making Ollama API request to {url}")
                 response = requests.post(url, json=data)
                 response.raise_for_status()
                 return response.json().get('response', '')
