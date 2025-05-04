@@ -1,0 +1,12 @@
+{{ role_prompt }}
+
+SESSION_ROOT_FOLDER: {{ session_root }}
+STEP_LIMIT: {{ step_limit }}
+
+PLAN:
+```markdown
+{{ plan }}
+```
+
+Create a prompt_queue.csv file with steps to execute this plan. Each step should have an AGENT_ROLE and AGENT_INSTRUCTIONS. 
+Keep the number of steps under {{ step_limit }}.
