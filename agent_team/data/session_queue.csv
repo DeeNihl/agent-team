@@ -1,0 +1,4 @@
+session_name,session_prompt,session_folder_path
+hello_world,Create a simple Python script that prints 'Hello, Agent Team!' to the console.,
+analyze_data,Create a data analysis script that reads a CSV file, calculates basic statistics, and generates a visualization.,
+web_scraper,Develop a web scraper that extracts information from a specified website and saves it to a JSON file.,
