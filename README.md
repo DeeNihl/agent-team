@@ -1,3 +1,6 @@
+# NOT FUNCTIONAL, but a great example of bad vibe coding
+
+
 # Agent Team
 
 A bare bones Python autonomous agent project that manages a team of agents with different roles.
